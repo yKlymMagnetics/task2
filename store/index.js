@@ -1,6 +1,10 @@
+import {StoreLoggerPlugin} from './plugins/logger';
+
 export const state = () => ({
     users: null
 });
+
+export const plugins = [StoreLoggerPlugin];
 
 export const mutations = {
     SET_USERS_MUTATION: (state, users) => {
