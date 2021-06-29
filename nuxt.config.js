@@ -1,5 +1,21 @@
+import fetch from 'node-fetch';
+
+const usersAmount = 11; // from 1 to 10 including 10
+
+const getRoutesAmountArray = async () => {
+  const users = await fetch('https://jsonplaceholder.typicode.com/users');
+  const parsedUsers = await users.json();
+  return Array.from(Array((parsedUsers?.length  ?? -1) +1 ).keys())
+}
+
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  target: 'static',
+  // Disable this for static generation with crawler
+  generate: {
+    crawler: false,
+    routes: async () => (await getRoutesAmountArray()).map(idx => `/users/${idx}`)
+  },
+  // ------------------
   head: {
     title: 'task2',
     htmlAttrs: {
@@ -16,29 +32,21 @@ export default {
     ]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['~/plugins/currentDate.server.js', '~/plugins/currentDate.client.js'],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
   ],
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
 }
