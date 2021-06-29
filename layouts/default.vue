@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <NuxtLink to="/">Home</NuxtLink> |
-      <NuxtLink to="/users">Users</NuxtLink>
+      <NuxtLink to="/users">Users</NuxtLink> | 
+      <span>{{$currentDate()}}</span>
     </div>
     <nuxt />
   </div>
